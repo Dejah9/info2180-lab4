@@ -1,7 +1,10 @@
-window.onload = function(){
-
 //Exercise 1 
-  var avoid = document.getElementById("boundary1");
-  avoid.onmouseover = function(){
-    this.setAttribute("class","youlose");
+window.onload = function(){
+    var boundary = document.getElementById("boundary1");
+    boundary.onmouseover= function(){
+        if(boundary.className !== "boundary youlose"){
+            boundary.className += " youlose";
+        }
+
+    }
 }
