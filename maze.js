@@ -1,8 +1,8 @@
  
-    var gameStart = false;
+    var gameStart = true;
     var lose = false;
 
-//Exercise 4
+//Exercise 6
 window.onload = function(){
     var boundary = document.querySelectorAll(".boundary");
 
@@ -12,15 +12,14 @@ window.onload = function(){
 
     
     document.getElementById("end").addEventListener("mouseover", endgame);
+    document.getElementById("maze").addEventListener("mouseleave",endgame2);
     document.getElementById("start").addEventListener("click", gameGo);
-
 }
 
     
 
 function lost(){
     if (gameStart){
-        console.log(this);
         var boundary = document.querySelectorAll(".boundary");
         for (var i = 0; i < boundary.length-1; i++) {
             boundary[i].className += " youlose";
@@ -31,9 +30,11 @@ function lost(){
 }
  
 function endgame(){
-    if(lose){
-           document.getElementById("status").innerHTML="You Win!";
+    if(!lose){
+       document.getElementById("status").innerHTML="You Win!";
+       gameStart = false;
     }
+
 }
 
 
@@ -41,6 +42,7 @@ function endgame(){
 function gameGo(){
     resetBoundary("boundary");
     gameStart = true;
+    lose = false;
     document.getElementById("status").innerHTML="PLAYING";
 }
 
@@ -50,4 +52,14 @@ function resetBoundary(cssName){
     for (var i = 0; i < boundary.length-1; i++) {
         boundary[i].className = cssName;
     } 
+}
+
+function endgame2(){
+    lost();
+    if(!lose && gameStart){
+        document.getElementById("status").innerHTML="You Lose!";
+        gameStart = false;
+        lose = true;
+    }
+    
 }
